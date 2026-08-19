@@ -8,7 +8,8 @@
 ai-skills/
 ├── README.md                  # 本索引
 └── skills/
-    └── open-kimi-ppt/         # 第一个 skill：open-kimi-ppt 增强版（详见其目录内 README）
+    ├── open-kimi-ppt/         # open-kimi-ppt 增强版
+    └── reverse-skill/         # reverse-skill 路由包（vendored v1.0.1）
 ```
 
 ## Skills 索引
@@ -16,6 +17,7 @@ ai-skills/
 | Skill | 说明 | 详细文档 |
 |-------|------|----------|
 | [open-kimi-ppt](skills/open-kimi-ppt/) | 逆向 Kimi Slides 的非官方演示文稿 Skill，创建/编辑/复刻/读取并导出 PPT/PPTX；本版增强：支持读取/保存**服务器主机**目录 | [skills/open-kimi-ppt/README.md](skills/open-kimi-ppt/README.md) |
+| [reverse-skill](skills/reverse-skill/) | 逆向 / 授权渗透 / 安全研究技能路由包（上游 [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) v1.0.1）。41 条规则路由到 APK、二进制、JS、CTF、固件等 42 个模块 | [skills/reverse-skill/SKILL.md](skills/reverse-skill/SKILL.md) · [SOURCE.md](skills/reverse-skill/SOURCE.md) |
 
 ## 安装方法
 
@@ -26,7 +28,10 @@ ai-skills/
 cp -r skills/<skill-name> ~/.agents/skills/
 ```
 
-open-kimi-ppt 的完整安装、使用、Prompt 示例与安全说明见 [skills/open-kimi-ppt/README.md](skills/open-kimi-ppt/README.md)。
+各 Skill 的完整安装与说明：
+
+- open-kimi-ppt → [skills/open-kimi-ppt/README.md](skills/open-kimi-ppt/README.md)
+- reverse-skill → [skills/reverse-skill/SKILL.md](skills/reverse-skill/SKILL.md)（Agent 先读这个；上游文档在同目录 `README_AI.md` / `RULES.md`）
 
 ## 新增 Skill 约定
 
@@ -37,5 +42,5 @@ open-kimi-ppt 的完整安装、使用、Prompt 示例与安全说明见 [skills
 
 ## 授权
 
-- 各 Skill 保留其上游项目许可证（如 open-kimi-ppt 为 MIT，见其目录内 README 授权节）
+- 各 Skill 保留其上游项目许可证（open-kimi-ppt：MIT；reverse-skill：MIT，其中 `CTF-Sandbox-Orchestrator/` 为 GPLv3）
 - 本仓库结构、索引与增量修改按需选用开源许可
