@@ -1,1 +1,1 @@
-@/workspace/push-biaoshu/p3_content.md
+PLACEHOLDER_WILL_REPLACE
