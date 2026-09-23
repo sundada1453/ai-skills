@@ -12,6 +12,9 @@ echo "  小波标书助手V9.0 macOS 环境配置"
 echo "========================================"
 echo ""
 
+# --------------------------------------------------
+# 1. 检查 Python 3
+# --------------------------------------------------
 echo "[1/5] 检查 Python 3..."
 if command -v python3 &>/dev/null; then
     PY_VERSION=$(python3 --version 2>&1)
@@ -31,8 +34,13 @@ else
 fi
 echo ""
 
+# --------------------------------------------------
+# 2. 安装 Python 依赖
+# --------------------------------------------------
 echo "[2/5] 安装 Python 依赖库..."
 PIP_ARGS="--quiet"
+
+# 核心依赖
 echo "  安装核心依赖 (python-docx, pdfplumber, openpyxl, PyPDF2)..."
 $PYTHON_CMD -m pip install $PIP_ARGS python-docx pdfplumber openpyxl PyPDF2 2>/dev/null || {
     echo "  ⚠ 部分核心依赖安装失败，尝试逐个安装..."
@@ -40,19 +48,37 @@ $PYTHON_CMD -m pip install $PIP_ARGS python-docx pdfplumber openpyxl PyPDF2 2>/d
         $PYTHON_CMD -m pip install $PIP_ARGS "$pkg" 2>/dev/null && echo "    ✓ $pkg" || echo "    ✗ $pkg (失败)"
     done
 }
+
+# MarkItDown（二级解析，推荐）
 echo "  安装 MarkItDown (二级解析，可选)..."
 $PYTHON_CMD -m pip install $PIP_ARGS "markitdown[all]" 2>/dev/null && echo "    ✓ markitdown" || echo "    ⚠ markitdown 安装失败，二级解析将不可用"
+
 echo "  ✓ 依赖安装完成"
 echo ""
 
+# --------------------------------------------------
+# 3. 检测中文字体
+# --------------------------------------------------
 echo "[3/5] 检测中文字体..."
 FONT_AVAILABLE=""
-MAC_FONTS=("Songti SC" "STSong" "SimSun" "PingFang SC" "Heiti SC")
+
+# macOS 常见中文字体（按优先级排序）
+MAC_FONTS=(
+    "Songti SC"        # 宋体（macOS 自带）
+    "STSong"           # 华文宋体
+    "SimSun"           # 宋体（如已安装）
+    "PingFang SC"      # 苹方（备选）
+    "Heiti SC"         # 黑体（备选）
+)
+
+# 通过 system_profiler 或 fc-list 检测
 if command -v fc-list &>/dev/null; then
     INSTALLED_FONTS=$(fc-list : family 2>/dev/null)
 else
+    # macOS 没有 fc-list 时，检查字体文件目录
     INSTALLED_FONTS=$(ls "/System/Library/Fonts/" "/Library/Fonts/" ~/Library/Fonts/ 2>/dev/null | tr '\n' '|')
 fi
+
 for font in "${MAC_FONTS[@]}"; do
     if echo "$INSTALLED_FONTS" | grep -iq "$font" 2>/dev/null; then
         FONT_AVAILABLE="$font"
@@ -60,12 +86,15 @@ for font in "${MAC_FONTS[@]}"; do
         break
     fi
 done
+
 if [ -z "$FONT_AVAILABLE" ]; then
     echo "  ⚠ 未检测到专用中文字体，将使用默认字体"
     echo "  建议: macOS 自带 Songti SC，通常无需额外安装"
     FONT_AVAILABLE="Songti SC"
     echo "  → 默认使用: $FONT_AVAILABLE"
 fi
+
+# 生成字体映射配置
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 FONT_CONFIG="$SCRIPT_DIR/macos_font_config.json"
 cat > "$FONT_CONFIG" << EOF
@@ -90,8 +119,18 @@ EOF
 echo "  ✓ 字体配置已保存: $FONT_CONFIG"
 echo ""
 
+# --------------------------------------------------
+# 4. 检查技能目录路径
+# --------------------------------------------------
 echo "[4/5] 检查技能目录..."
-CONFIG_DIRS=("$HOME/.config/TeleAgent/skills" "$HOME/.local/share/TeleAgent/skills" "$HOME/Library/Application Support/TeleAgent/skills")
+
+# macOS 上 TeleAgent 配置目录的常见位置
+CONFIG_DIRS=(
+    "$HOME/.config/TeleAgent/skills"
+    "$HOME/.local/share/TeleAgent/skills"
+    "$HOME/Library/Application Support/TeleAgent/skills"
+)
+
 SKILLS_DIR=""
 for dir in "${CONFIG_DIRS[@]}"; do
     if [ -d "$dir" ]; then
@@ -100,11 +139,13 @@ for dir in "${CONFIG_DIRS[@]}"; do
         break
     fi
 done
+
 if [ -z "$SKILLS_DIR" ]; then
     echo "  ⚠ 未找到 TeleAgent 技能目录"
     echo "  如果通过其他方式安装，请设置环境变量:"
     echo "    export TELEAGENT_CONFIG_DIR=<你的配置目录>"
 else
+    # 检查 xc-doc-parser 是否存在
     if [ -d "$SKILLS_DIR/xc-doc-parser" ]; then
         echo "  ✓ xc-doc-parser 技能已安装（三级解析可用）"
     else
@@ -113,8 +154,13 @@ else
 fi
 echo ""
 
+# --------------------------------------------------
+# 5. 验证安装
+# --------------------------------------------------
 echo "[5/5] 验证安装..."
 echo ""
+
+# 测试核心模块导入
 $PYTHON_CMD -c "
 import sys
 modules = ['docx', 'pdfplumber', 'openpyxl', 'PyPDF2']
@@ -128,15 +174,18 @@ for m in modules:
     except ImportError:
         print(f'  ✗ {m} (未安装)')
         fail += 1
+
 try:
     from markitdown import MarkItDown
     print('  ✓ markitdown')
     ok += 1
 except ImportError:
     print('  ⚠ markitdown (未安装，二级解析不可用)')
+
 print(f'')
 print(f'  结果: {ok} 个可用, {fail} 个缺失')
 " 2>/dev/null
+
 echo ""
 echo "========================================"
 echo "  配置完成！"
