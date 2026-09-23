@@ -41,8 +41,9 @@ def extract_template_format(template_path):
             'header_distance_cm': round(section.header_distance.cm, 2) if section.header_distance else 1.5,
             'footer_distance_cm': round(section.footer_distance.cm, 2) if section.footer_distance else 1.75,
         }
-        break
+        break  # 只取第一个 section
 
+    # === 样式信息 ===
     for style in doc.styles:
         if style.type is None or not style.name:
             continue
@@ -51,6 +52,8 @@ def extract_template_format(template_path):
             font = style.font
             pf = style.paragraph_format
             style_info = {}
+
+            # 字体信息
             if font.name:
                 style_info['font'] = font.name
             if font.size:
@@ -59,6 +62,8 @@ def extract_template_format(template_path):
                 style_info['bold'] = font.bold
             if font.color and font.color.rgb:
                 style_info['color'] = str(font.color.rgb)
+
+            # 检查东亚字体设置
             if hasattr(font, 'element'):
                 rPr = font.element.find(qn('w:rPr'))
                 if rPr is not None:
@@ -67,6 +72,8 @@ def extract_template_format(template_path):
                         east = rFonts.get(qn('w:eastAsia'))
                         if east:
                             style_info['east_asia_font'] = east
+
+            # 段落格式
             if pf:
                 if pf.line_spacing:
                     style_info['line_spacing'] = pf.line_spacing
@@ -78,9 +85,11 @@ def extract_template_format(template_path):
                     style_info['space_after_pt'] = pf.space_after.pt
                 if pf.first_line_indent:
                     style_info['first_line_indent_cm'] = round(pf.first_line_indent.cm, 2)
+
             if not style_info:
                 continue
 
+            # 分类存储
             name = style.name
             if name == 'Normal':
                 fmt['normal'] = style_info
@@ -94,6 +103,7 @@ def extract_template_format(template_path):
                 fmt['table_style'][name] = style_info
             elif name in ('正文1', 'Title', 'Plain Text', 'Footer', 'Header'):
                 fmt['custom_styles'][name] = style_info
+
         except Exception:
             continue
 
@@ -105,25 +115,32 @@ def print_format_summary(fmt):
     print('='*60)
     print('模板格式摘要')
     print('='*60)
+
     p = fmt['page']
     print(f'\n[页面设置]')
     print(f'  纸张: {p["page_width_cm"]}cm x {p["page_height_cm"]}cm (A4)')
     print(f'  上/下边距: {p["top_margin_cm"]}cm / {p["bottom_margin_cm"]}cm')
     print(f'  左/右边距: {p["left_margin_cm"]}cm / {p["right_margin_cm"]}cm')
     print(f'  页眉/页脚距: {p["header_distance_cm"]}cm / {p["footer_distance_cm"]}cm')
+
     n = fmt['normal']
     print(f'\n[正文 Normal]')
     print(f'  字体: {n.get("font", "N/A")} | 字号: {n.get("size_pt", "N/A")}pt')
     print(f'  行距: {n.get("line_spacing", "N/A")} | 首行缩进: {n.get("first_line_indent_cm", "N/A")}cm')
+
     print(f'\n[标题样式]')
     for level, info in sorted(fmt['headings'].items()):
         print(f'  {level}: {info.get("font", "N/A")} {info.get("size_pt", "N/A")}pt'
-              f' | 加粗: {info.get("bold", "N/A")} | 行距: {info.get("line_spacing", "N/A")} '
-              f'| 段前: {info.get("space_before_pt", "N/A")}pt | 段后: {info.get("space_after_pt", "N/A")}pt')
+              f' | 加粗: {info.get("bold", "N/A")}'
+              f' | 行距: {info.get("line_spacing", "N/A")}'
+              f' | 段前: {info.get("space_before_pt", "N/A")}pt'
+              f' | 段后: {info.get("space_after_pt", "N/A")}pt')
+
     if fmt['table_style']:
         print(f'\n[表格样式]')
         for name, info in fmt['table_style'].items():
             print(f'  {name}: {info.get("font", "N/A")}')
+
     if fmt['custom_styles']:
         print(f'\n[自定义样式]')
         for name, info in fmt['custom_styles'].items():
@@ -134,13 +151,18 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         print('用法: python template_extractor.py <模板.docx> [输出.json]')
         sys.exit(1)
+
     template_path = sys.argv[1]
     if not os.path.exists(template_path):
         print(f'错误: 文件不存在: {template_path}')
         sys.exit(1)
+
     fmt = extract_template_format(template_path)
     print_format_summary(fmt)
+
+    # 输出 JSON
     json_str = json.dumps(fmt, ensure_ascii=False, indent=2)
+
     if len(sys.argv) >= 3:
         output_path = sys.argv[2]
         with open(output_path, 'w', encoding='utf-8') as f:
