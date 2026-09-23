@@ -1,0 +1,236 @@
+<mxfile host="Electron" modified="2026-07-23T00:00:00.000Z" version="26.0.0">
+    <diagram id="bobobiaoshu-workflow-v9" name="小波标书助手工作流 v9.0">
+        <mxGraphModel dx="1422" dy="2200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1620" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+
+                <!-- Title -->
+                <mxCell id="2" value="小波标书助手 v9.0 — 18步标准工作流" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="120" y="15" width="560" height="40" as="geometry"/>
+                </mxCell>
+
+                <!-- Start -->
+                <mxCell id="3" value="开始" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="70" width="180" height="45" as="geometry"/>
+                </mxCell>
+
+                <!-- Phase 1: Input (Blue) -->
+                <mxCell id="4" value="① 接收招标文件 + Word 模板" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="140" width="320" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="② 询问目标页数 + 表格图表选项&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#666666&quot;&gt;必问项，不可跳过&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="208" width="320" height="48" as="geometry"/>
+                </mxCell>
+
+                <!-- Phase 2: Analysis (Green) -->
+                <mxCell id="6" value="③ 三级解析招标文件&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#666666&quot;&gt;parse_bid_files.py v4.0（Markdown表格+项目信息）&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="285" width="320" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="6b" value="④ 招标文件深度分析&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#666666&quot;&gt;bid_analysis.py → 10节分析报告&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="353" width="320" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="⑤ 评分点自动映射&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#666666&quot;&gt;eval_mapping.py report&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="421" width="320" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="7b" value="⑥ ★必含标题检测&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#666666&quot;&gt;eval_required_headings.py（扫描「包括但不限于」枚举项）&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="489" width="320" height="48" as="geometry"/>
+                </mxCell>
+
+                <!-- Phase 3: Preparation (Yellow) -->
+                <mxCell id="8" value="⑦ 提取模板格式&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#666666&quot;&gt;template_extractor.py&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="566" width="320" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="⑧ 搜索片段库 + 相关性预筛&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#666666&quot;&gt;relevance_check.py（弃用低分片段）&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="634" width="320" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="⑨ 生成大纲 + Token/时间估算&lt;br&gt;&lt;b&gt;★ 必须等待用户确认 ★&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="702" width="400" height="80" as="geometry"/>
+                </mxCell>
+
+                <!-- Loop-back box -->
+                <mxCell id="20" value="修改大纲&lt;br&gt;调整后重新确认" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;dashed=1;dashPattern=8 4;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="717" width="160" height="55" as="geometry"/>
+                </mxCell>
+
+                <!-- Phase 4: Writing (Orange) -->
+                <mxCell id="11" value="⑩ 并发编写各章节（片段改写 / 从零编写）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="812" width="320" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="⑪ 章节字数检查&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#666666&quot;&gt;check_chapter_words.py&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="880" width="320" height="48" as="geometry"/>
+                </mxCell>
+
+                <!-- Phase 5: Quality (Red) -->
+                <mxCell id="13" value="⑫ 去 AI 痕迹（上下文感知替换策略）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="957" width="320" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="⑬ 内容相关性检查" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="1025" width="320" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="⑭ 片段残留检查&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#666666&quot;&gt;snippet_adapt.py check&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="1093" width="320" height="48" as="geometry"/>
+                </mxCell>
+
+                <!-- Phase 6: Output (Purple) -->
+                <mxCell id="16" value="⑮ 汇总整合 → 转换 Word&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#666666&quot;&gt;merge_chapters.py + convert_to_word.py（numPr自动编号）&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="1170" width="320" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="⑯ 文档质量全检查 + 必含标题验证&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#666666&quot;&gt;doc_quality_check.py + eval_required_headings.py check&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="1238" width="320" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="⑰ 保存通用片段到 memory&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#666666&quot;&gt;snippet_manager.py save&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="1306" width="320" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="18b" value="⑱ 任务完成通知用户" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="1374" width="320" height="48" as="geometry"/>
+                </mxCell>
+
+                <!-- End -->
+                <mxCell id="19" value="完成" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="1442" width="180" height="45" as="geometry"/>
+                </mxCell>
+
+                <!-- Phase Labels (right side) -->
+                <mxCell id="30" value="输入阶段" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1;fontColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="170" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="分析阶段" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1;fontColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="420" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="准备阶段" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1;fontColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="620" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="编写阶段" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1;fontColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="840" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="质量阶段" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1;fontColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="1020" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="输出阶段" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1;fontColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="1290" width="80" height="30" as="geometry"/>
+                </mxCell>
+
+                <!-- Edges: Main Flow -->
+                <mxCell id="40" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;strokeWidth=1.5;" parent="1" source="3" target="4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;strokeWidth=1.5;" parent="1" source="4" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;strokeWidth=1.5;" parent="1" source="5" target="6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#82b366;strokeWidth=1.5;" parent="1" source="6" target="6b" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="43b" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#82b366;strokeWidth=1.5;" parent="1" source="6b" target="7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="43c" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#82b366;strokeWidth=1.5;" parent="1" source="7" target="7b" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;strokeWidth=1.5;" parent="1" source="7b" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;strokeWidth=1.5;" parent="1" source="8" target="9" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;strokeWidth=1.5;" parent="1" source="9" target="10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+
+                <!-- Decision: 通过 → continue -->
+                <mxCell id="47" value="通过" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#82b366;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#82b366;labelBackgroundColor=#ffffff;" parent="1" source="10" target="11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+
+                <!-- Decision: 需修改 → loop-back -->
+                <mxCell id="48" value="需修改" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#b85450;strokeWidth=1.5;dashed=1;dashPattern=6 4;fontSize=11;fontStyle=1;fontColor=#b85450;labelBackgroundColor=#ffffff;" parent="1" source="10" target="20" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+
+                <!-- Loop-back → back to ⑨ -->
+                <mxCell id="49" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#b85450;strokeWidth=1.5;dashed=1;dashPattern=6 4;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="20" target="10" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="100" y="700"/>
+                            <mxPoint x="100" y="742"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+
+                <!-- Continue main flow -->
+                <mxCell id="50" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d79b00;strokeWidth=1.5;" parent="1" source="11" target="12" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#b85450;strokeWidth=1.5;" parent="1" source="12" target="13" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="52" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#b85450;strokeWidth=1.5;" parent="1" source="13" target="14" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="53" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#b85450;strokeWidth=1.5;" parent="1" source="14" target="15" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="54" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;strokeWidth=1.5;" parent="1" source="15" target="16" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="55" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;strokeWidth=1.5;" parent="1" source="16" target="17" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="56" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;strokeWidth=1.5;" parent="1" source="17" target="18" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="56b" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;strokeWidth=1.5;" parent="1" source="18" target="18b" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="57" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;strokeWidth=1.5;" parent="1" source="18b" target="19" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+
+                <!-- Legend -->
+                <mxCell id="60" value="图例" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="620" y="1510" width="60" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="61" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="620" y="1535" width="20" height="14" as="geometry"/>
+                </mxCell>
+                <mxCell id="62" value="输入" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="645" y="1533" width="40" height="18" as="geometry"/>
+                </mxCell>
+                <mxCell id="63" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="620" y="1553" width="20" height="14" as="geometry"/>
+                </mxCell>
+                <mxCell id="64" value="分析" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="645" y="1551" width="40" height="18" as="geometry"/>
+                </mxCell>
+                <mxCell id="65" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="620" y="1571" width="20" height="14" as="geometry"/>
+                </mxCell>
+                <mxCell id="66" value="准备" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="645" y="1569" width="40" height="18" as="geometry"/>
+                </mxCell>
+                <mxCell id="67" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="690" y="1535" width="20" height="14" as="geometry"/>
+                </mxCell>
+                <mxCell id="68" value="编写" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="715" y="1533" width="40" height="18" as="geometry"/>
+                </mxCell>
+                <mxCell id="69" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="690" y="1553" width="20" height="14" as="geometry"/>
+                </mxCell>
+                <mxCell id="70" value="质量" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="715" y="1551" width="40" height="18" as="geometry"/>
+                </mxCell>
+                <mxCell id="71" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="690" y="1571" width="20" height="14" as="geometry"/>
+                </mxCell>
+                <mxCell id="72" value="输出" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="715" y="1569" width="40" height="18" as="geometry"/>
+                </mxCell>
+
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
