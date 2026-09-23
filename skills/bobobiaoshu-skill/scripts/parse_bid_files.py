@@ -1,1 +1,1 @@
-FILE_CONTENT_PLACEHOLDER_USE_LOCAL
+@/tmp/upload_parse_bid_files.py
