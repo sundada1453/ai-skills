@@ -26,10 +26,13 @@ def merge_chapters(chapter_dir, output_path):
         with open(fpath, 'r', encoding='utf-8') as f:
             content = f.read()
 
+        # 去掉末尾多余空行（最多保留1个）
         content = content.rstrip('\n')
+        # 去掉开头空行
         content = content.lstrip('\n')
 
         if merged_parts:
+            # 上一个文件末尾没有空行 → 补充2个空行分隔
             merged_parts.append('\n\n')
 
         merged_parts.append(content)
