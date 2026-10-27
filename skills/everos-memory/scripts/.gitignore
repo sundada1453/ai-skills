@@ -1,0 +1,5 @@
+state.json
+last_sync.json
+__pycache__/
+everos.env
+bw-data/
