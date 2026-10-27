@@ -9,7 +9,8 @@ ai-skills/
 ├── README.md                  # 本索引
 └── skills/
     ├── open-kimi-ppt/         # open-kimi-ppt 增强版
-    └── reverse-skill/         # reverse-skill 路由包（vendored v1.0.1）
+    ├── reverse-skill/         # reverse-skill 路由包（vendored v1.0.1）
+    └── everos-memory/         # EverOS 多智能体共享记忆 + Vaultwarden 密钥规则
 ```
 
 ## Skills 索引
@@ -18,6 +19,7 @@ ai-skills/
 |-------|------|----------|
 | [open-kimi-ppt](skills/open-kimi-ppt/) | 逆向 Kimi Slides 的非官方演示文稿 Skill，创建/编辑/复刻/读取并导出 PPT/PPTX；本版增强：支持读取/保存**服务器主机**目录 | [skills/open-kimi-ppt/README.md](skills/open-kimi-ppt/README.md) |
 | [reverse-skill](skills/reverse-skill/) | 逆向 / 授权渗透 / 安全研究技能路由包（上游 [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) v1.0.1）。41 条规则路由到 APK、二进制、JS、CTF、固件等 42 个模块 | [skills/reverse-skill/SKILL.md](skills/reverse-skill/SKILL.md) · [SOURCE.md](skills/reverse-skill/SOURCE.md) |
+| [everos-memory](skills/everos-memory/) | 多智能体共享 EverOS 云端记忆：偏好共享区、经验区（Cases/Skills）、同步节奏、冲突处理、脱敏规则，以及自托管 Vaultwarden + bw CLI 的密钥规则 | [skills/everos-memory/README.md](skills/everos-memory/README.md) |
 
 ## 安装方法
 
@@ -31,6 +33,7 @@ cp -r skills/<skill-name> ~/.agents/skills/
 各 Skill 的完整安装与说明：
 
 - open-kimi-ppt → [skills/open-kimi-ppt/README.md](skills/open-kimi-ppt/README.md)
+- everos-memory → [skills/everos-memory/SKILL.md](skills/everos-memory/SKILL.md)
 - reverse-skill → [skills/reverse-skill/SKILL.md](skills/reverse-skill/SKILL.md)（Agent 先读这个；上游文档在同目录 `README_AI.md` / `RULES.md`）
 
 ## 新增 Skill 约定
