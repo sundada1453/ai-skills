@@ -45,7 +45,7 @@ def post(path, body, timeout=120):
             if i < 2: time.sleep(5); continue
             return 0, {"error": str(e)[:300]}
 
-# ---------- 脱敏 / 本地配置过滤 ----------
+# ---------- 密钥 / IP 过滤 ----------
 SECRET = [
     r"\bsk-(?=[A-Za-z0-9_-]*\d)[A-Za-z0-9_-]{16,}", r"\b[sr]k_(?:live|test)_[A-Za-z0-9]{16,}",
     r"\b(?:AKIA|ASIA)[0-9A-Z]{16}\b", r"\b(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})",
@@ -59,28 +59,12 @@ URLPW = r"\b([a-z][a-z0-9+.-]*://)[^/?#\s:@]{1,64}:[^/?#@\s]{1,256}@"
 PII = {
     "IP": r"\b(?:\d{1,3}\.){3}\d{1,3}(?::\d+)?\b",
     "IPv6": r"\b(?:[0-9a-fA-F]{1,4}:){4,7}[0-9a-fA-F]{1,4}\b",
-    "邮箱": r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+",
-    "手机": r"(?<!\d)1[3-9]\d{9}(?!\d)",
-    "身份证": r"(?<!\d)\d{17}[\dXx](?!\d)",
     "主机名": r"\b[\w-]+\.(?:ts\.net|local|lan|internal|home)\b",
-    "金额": r"\d[\d,.]*\s*(?:万元|元|亿元)",
-    "招标编号": r"(?i)(?:招标|项目|采购)编号\s*[:：]?\s*[\w-]+",
 }
-LOCAL = {
-    "路径": r"(?:/workspace|/home|/cursor|/root|/opt|/etc|/var|/tmp|~)/[^\s`'\")，。、]*|[A-Za-z]:\\[^\s`'\")，。]*",
-    "执行器": r"(?i)\b(?:grok(?:-?cli)?|agy|antigravity|pi|orca|uvx|claude ?code|codex)\b",
-    "机器/bot id": r"(?i)\b(?:machine|bot|agent|store|canvas)[-_]?id\s*[:=]?\s*[\w-]{6,}|\bstore-[0-9a-f-]{8,}\b",
-}
-DROP_LINE = r"(工作目录|cwd|无头|headless|是否调用|--yolo|--dangerously|machineId)"
 
 def sanitize(text, stats):
     """返回脱敏文本；stats 计数各类被过滤项。"""
-    out = []
-    for line in str(text).splitlines():
-        if re.search(DROP_LINE, line, re.I):
-            stats["本地配置行"] = stats.get("本地配置行", 0) + 1; continue
-        out.append(line)
-    t = "\n".join(out)
+    t = str(text)
     def sub(name, pat, rep, s):
         n = len(re.findall(pat, s))
         if n: stats[name] = stats.get(name, 0) + n
@@ -88,7 +72,6 @@ def sanitize(text, stats):
     t = sub("URL密码", URLPW, r"\1<redacted>@", t)
     for p in SECRET: t = sub("密钥", p, "<已过滤:密钥>", t)
     for k, p in PII.items(): t = sub(k, p, f"<已过滤:{k}>", t)
-    for k, p in LOCAL.items(): t = sub(k, p, f"<本地:{k}>", t)
     return t
 
 def sha(s): return hashlib.sha256(s.encode() if isinstance(s, str) else s).hexdigest()
