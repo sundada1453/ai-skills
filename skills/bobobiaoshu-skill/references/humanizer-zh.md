@@ -14,13 +14,13 @@ metadata:
   trigger: 编辑或审阅文本，去除 AI 写作痕迹
   source: 翻译自 blader/humanizer，参考 hardikpandya/stop-slop
 AIGC:
-  ContentProducer: '001191110102MAD55U9H0F10002'
-  ContentPropagator: '001191110102MAD55U9H0F10002'
+  ContentProducer: '<AIGC-CONTENT-PRODUCER-ID>'
+  ContentPropagator: '<AIGC-CONTENT-PRODUCER-ID>'
   Label: '1'
-  ProduceID: 'd28ff56e-3450-48cb-a0db-6d3db9d08039'
-  PropagateID: 'd28ff56e-3450-48cb-a0db-6d3db9d08039'
-  ReservedCode1: 'f77720e8-3551-4ed9-8dba-6bf95caf4701'
-  ReservedCode2: 'f77720e8-3551-4ed9-8dba-6bf95caf4701'
+  ProduceID: '<AIGC-PRODUCE-ID>'
+  PropagateID: '<AIGC-PRODUCE-ID>'
+  ReservedCode1: '<AIGC-RESERVED-CODE>'
+  ReservedCode2: '<AIGC-RESERVED-CODE>'
 ---
 
 # Humanizer-zh: 去除 AI 写作痕迹

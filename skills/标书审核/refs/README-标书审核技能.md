@@ -1,6 +1,6 @@
 # 指针
 
-全局技能：[标书审核](sand-workflow:skill-1789099389324)
+技能入口：[SKILL.md](../SKILL.md)
 
 本地手册：
 - 标书审核方法-给审核AI.md

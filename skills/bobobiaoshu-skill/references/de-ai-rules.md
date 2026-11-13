@@ -1,12 +1,12 @@
 ---
 AIGC:
-  ContentProducer: '001191110102MAD55U9H0F10002'
-  ContentPropagator: '001191110102MAD55U9H0F10002'
+  ContentProducer: '<AIGC-CONTENT-PRODUCER-ID>'
+  ContentPropagator: '<AIGC-CONTENT-PRODUCER-ID>'
   Label: '1'
-  ProduceID: '75552c44-e0b1-4e2d-adad-c466f5046de8'
-  PropagateID: '75552c44-e0b1-4e2d-adad-c466f5046de8'
-  ReservedCode1: 'aee07d11-95c0-408a-9e93-afd85759f01c'
-  ReservedCode2: 'aee07d11-95c0-408a-9e93-afd85759f01c'
+  ProduceID: '<AIGC-PRODUCE-ID>'
+  PropagateID: '<AIGC-PRODUCE-ID>'
+  ReservedCode1: '<AIGC-RESERVED-CODE>'
+  ReservedCode2: '<AIGC-RESERVED-CODE>'
 ---
 
 # 去 AI 痕迹速查规则
