@@ -3,7 +3,7 @@
 本仓库为「小波标书助手V9.0」智能体技能的便携发行包，专为上传至 GitHub 分发及跨环境导入智能体工作流设计。
 
 - **技能名称**：小波标书助手V9.0 (`bobobiaoshu-skill`)
-- **原技能路径**：`/home/box/agent-data/workflows/bobobiaoshu-skill/`
+- **目录**：本仓库 `skills/bobobiaoshu-skill/`（自包含，拷入本机技能目录即可用）
 - **版本**：`V9.0.0`
 - **适用场景**：技术标编写、交通工程（高速/航道）投标、信息化项目投标、安全规划方案投标等
 - **触发词**：写标书、投标、技术标、招标文件、投标文件、技术方案、终稿
@@ -41,7 +41,6 @@
 bobobiaoshu-skill/
 ├── README.md                  # 本说明文档（便携包说明、环境依赖、快速上手）
 ├── SKILL.md                   # 技能核心提示词与执行规范流程（全流程标准）
-├── _skillhub_meta.json        # SkillHub 技能包元数据
 ├── biaoshu_workflow.drawio    # 标书生成完整工作流架构图（Draw.io 格式）
 ├── references/                # 写作规范与去 AI 痕迹理论参考
 │   ├── de-ai-rules.md         # 去 AI 痕迹速查规则与红旗词词典
@@ -131,4 +130,4 @@ bash scripts/macos_setup.sh
 
 1. **零敏感凭据**：本便携包所有代码、配置及文档中均**不包含任何真实密钥、私有 Token、密码或云服务凭据**（如有敏感位已完成 `<REDACTED>` 脱敏处理）。
 2. **零商业数据**：本包已彻底排查并剔除所有特定项目实际标书正文、客户商务数据与敏感工程样例，符合公开托管与安全合规标准。
-3. **安全审计日志**：导出与审计日志保存在 `/workspace/mem/logs/export-bobobiaoshu-skill.log`。
+3. **零本地痕迹**：本包不含任何本机安装元数据（如 `_skillhub_meta.json`）与 Python 缓存（`__pycache__/`、`*.pyc`）；导出/审计日志一律留在使用者本机，不随包分发。

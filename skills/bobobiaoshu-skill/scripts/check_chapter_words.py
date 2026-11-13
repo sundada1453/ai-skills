@@ -87,7 +87,7 @@ def check_chapters(md_dir, total_pages, total_score, chapter_scores):
     
     print(f"=" * 60)
     print(f"📊 章节字数检查")
-    print(f"=" * 60)
+    print("=" * 60)
     print(f"总页数: {total_pages} | 总分: {total_score}")
     print(f"每页字数: {chars_per_page} | 每分页数: {pages_per_score:.2f}")
     print(f"")
